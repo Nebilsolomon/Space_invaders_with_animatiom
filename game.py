@@ -42,22 +42,23 @@ class Game:
 #============================================================================
         self.black = (0, 0, 0)
         self.white = (255, 255, 255)
+        self.green = (0, 255, 0)
         self.state = "start"
 
         self.font_large = pg.font.Font(None, 60)
         self.font_small = pg.font.Font(None, 30)
-        self.title_text = self.font_large.render("My Awesome Game", True, self.white)
-        self.start_text = self.font_small.render("Click PLAY to start", True, self.white)
+        self.title_text = self.font_large.render("SPACE INVADERS", True, self.green)
+        #self.start_text = self.font_small.render("Click PLAY to start", True, self.white)
         self.button_width = 200
         self.button_height = 50
         self.button_x = self.settings.screen_width / 2 - self.button_width / 2
         self.button_y = self.settings.screen_height / 2 - self.button_height / 2
-        self.button_text = self.font_small.render("PLAY", True, self.black)
+        self.button_text = self.font_small.render("PLAY", True, self.green)
         self.button_text_x = self.button_x + self.button_width / 2 - self.button_text.get_width() / 2
         self.button_text_y = self.button_y + self.button_height / 2 - self.button_text.get_height() / 2
     
     def draw(self):
-        self.screen.fill(self.settings.bg_color)
+        self.screen.fill(self.black)
         self.screen.blit(self.title_text, (self.settings.screen_width / 2 - self.title_text.get_width() / 2, 100))
         pg.draw.rect(self.screen, self.black, (self.button_x, self.button_y, self.button_width, self.button_height))
         self.screen.blit(self.button_text, (self.button_text_x, self.button_text_y))
@@ -134,15 +135,16 @@ class Game:
             if self.state  == "start":
            # if True:
 
-                self.screen.blit(self.title_text, (self.settings.screen_width / 2 - self.title_text.get_width() / 2, self.settings.screen_height / 4))
-                self.screen.blit(self.start_text, (self.settings.screen_width / 2 - self.start_text.get_width() / 2, self.settings.screen_height / 2))
+              #  self.screen.blit(self.title_text, (self.settings.screen_width / 2 - self.title_text.get_width() / 2, self.settings.screen_height / 4))
+               # self.screen.blit(self.start_text, (self.settings.screen_width / 2 - self.start_text.get_width() / 2, self.settings.screen_height / 2))
             # pg.draw.rect(self.settings.screen_width, self.white, (self.button_x, self.button_y, self.button_width, self.button_height))
-                
-                pg.draw.rect(self.screen, self.white, (self.button_x, self.button_y, self.button_width, self.button_height))
+                self.draw()
+
+                #pg.draw.rect(self.screen, self.green, (self.button_x, self.button_y, self.button_width, self.button_height))
                 pg.display.update()
 
                 
-                self.screen.blit(self.button_text, (self.button_text_x, self.button_text_y))
+               # self.screen.blit(self.button_text, (self.button_text_x, self.button_text_y))
             elif self.state == "play":
             # Add your game code here
                 
