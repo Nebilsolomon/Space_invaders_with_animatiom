@@ -47,7 +47,7 @@ class Alien(Sprite):
         if not self.dying:
             self.dying = True
             self.timer = self.timer_explosion
-            self.sb.increment_score()
+          #  self.sb.increment_score()
     def update(self): 
         if self.timer == self.timer_explosion and self.timer.is_expired():
             self.kill()
@@ -154,10 +154,16 @@ class Aliens:
         collisions = pg.sprite.groupcollide(self.aliens, self.ship_lasers, False, True)  
         if collisions:
             for alien in collisions:
+                print("collisions:   alienns " )
+                self.sb.increment_score(alien)
+                print(alien.type)
+
+
                 alien.hit()
 
         collisions = pg.sprite.spritecollide(self.ship, self.aliens_lasers.lasers, True)
         if collisions:
+            print("collisions:   shipppp ") 
             self.ship.hit()
 
         # aliens_lasers collide with barrier?
