@@ -171,17 +171,14 @@ class Game:
         sys.exit()
 
     def play(self):
-        self.sound.play_bg()
+        #self.sound.play_bg()
         while True:     
             self.handle_events() 
 
             #self.screen.fill(self.black)
             if self.state  == "start":
-           # if True:
-
-              #  self.screen.blit(self.title_text, (self.settings.screen_width / 2 - self.title_text.get_width() / 2, self.settings.screen_height / 4))
-               # self.screen.blit(self.start_text, (self.settings.screen_width / 2 - self.start_text.get_width() / 2, self.settings.screen_height / 2))
-            # pg.draw.rect(self.settings.screen_width, self.white, (self.button_x, self.button_y, self.button_width, self.button_height))
+                
+                self.sound.play_bg()
               
                 self.screen.blit(self.label, (300, 50))
                 self.draw()
