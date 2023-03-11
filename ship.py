@@ -66,6 +66,7 @@ class Ship(Sprite):  # TODO -- change to use YOUR OWN IMAGE for the ship AND its
 
     def really_dead(self):
         self.ships_left -= 1
+       # self.   ships_num_ship_left
         print(f'Ship is dead! Only {self.ships_left} ships left')
         self.game.reset() if self.ships_left > 0 else self.game.game_over()
 
