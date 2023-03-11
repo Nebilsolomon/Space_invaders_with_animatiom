@@ -22,7 +22,7 @@ class Game:
         size = self.settings.screen_width, self.settings.screen_height   # tuple
     
         self.screen = pg.display.set_mode(size=size)
-        pg.display.set_caption("Alien Invasion xxxx")
+        pg.display.set_caption("Alien Invasion")
 
         self.sound = Sound(bg_music="sounds/startrek.wav")
         self.scoreboard = Scoreboard(game=self)  
@@ -47,6 +47,17 @@ class Game:
 
         self.font_large = pg.font.Font(None, 60)
         self.font_small = pg.font.Font(None, 30)
+        
+        self.image1 = pg.image.load("images/alien__00.png")
+        self.image1 = pg.transform.scale(self.image1, (100, 100))
+        self.font = pg.font.Font(None, 36)
+        self.label = self.font.render("= 10", True, self.green)
+
+
+        
+
+
+
         self.title_text = self.font_large.render("SPACE INVADERS", True, self.green)
         #self.start_text = self.font_small.render("Click PLAY to start", True, self.white)
         self.button_width = 200
@@ -59,8 +70,16 @@ class Game:
     
     def draw(self):
         self.screen.fill(self.black)
-        self.screen.blit(self.title_text, (self.settings.screen_width / 2 - self.title_text.get_width() / 2, 100))
-        pg.draw.rect(self.screen, self.black, (self.button_x, self.button_y, self.button_width, self.button_height))
+
+        self.screen.blit(self.image1, (500, 150))
+        self.screen.blit(self.label , (640, 180))
+        self.screen.blit(self.title_text,(400, 20) )
+
+
+
+
+
+       # pg.draw.rect(self.screen, self.black, (self.button_x, self.button_y, self.button_width, self.button_height))
         self.screen.blit(self.button_text, (self.button_text_x, self.button_text_y))
 
 
@@ -138,8 +157,9 @@ class Game:
               #  self.screen.blit(self.title_text, (self.settings.screen_width / 2 - self.title_text.get_width() / 2, self.settings.screen_height / 4))
                # self.screen.blit(self.start_text, (self.settings.screen_width / 2 - self.start_text.get_width() / 2, self.settings.screen_height / 2))
             # pg.draw.rect(self.settings.screen_width, self.white, (self.button_x, self.button_y, self.button_width, self.button_height))
+              
+                self.screen.blit(self.label, (300, 50))
                 self.draw()
-
                 #pg.draw.rect(self.screen, self.green, (self.button_x, self.button_y, self.button_width, self.button_height))
                 pg.display.update()
 
