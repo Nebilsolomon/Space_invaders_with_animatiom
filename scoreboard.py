@@ -1,5 +1,9 @@
 import pygame as pg 
 # import pygame.font
+from pygame.sprite import Sprite, Group
+from ship import Ship
+
+
 import os
 
 class Scoreboard:
@@ -8,6 +12,7 @@ class Scoreboard:
         self.game = game
        
         self.level = 0
+        self.ships = Group()
   
        
      
@@ -66,6 +71,33 @@ class Scoreboard:
 
 
         self.prep_score()
+    
+    def ships_num_ship_left(ship):
+        return ship
+
+
+    
+
+# =================================================================
+
+    def prep_ships(self):
+        #self.ships = Group()
+        for ship_number in range(3):
+            ship = Ship(game= self.game) 
+            ship.rect.x = 10 + ship_number * ship.rect.width 
+            ship.rect.y = 10
+            self.ships.add(ship)
+            
+
+
+#================================================================
+
+
+
+
+
+
+
 
     def prep_score(self): 
 
@@ -109,3 +141,5 @@ class Scoreboard:
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.level_image, self.level_rect)
+        self.prep_ships()
+        self.ships.draw(self.screen)
