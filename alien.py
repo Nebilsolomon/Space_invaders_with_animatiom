@@ -22,6 +22,7 @@ class Alien(Sprite):
 
     def __init__(self, game, type, alien_number):
         super().__init__()
+        self.level = 0 
         self.screen = game.screen
         self.settings = game.settings
         self.image = pg.image.load('images/alien0.bmp')
@@ -68,6 +69,8 @@ class Aliens:
         self.game = game
         self.sb = game.scoreboard
         self.aliens = Group()
+        self.level = 0
+      
 
         self.ship_lasers = game.ship_lasers.lasers    # a laser Group
         self.aliens_lasers = game.alien_lasers
@@ -77,6 +80,7 @@ class Aliens:
         self.shoot_requests = 0
         self.ship = game.ship
         self.create_fleet()
+       
 
     def get_number_aliens_x(self, alien_width):
         available_space_x = self.settings.screen_width - 6 * alien_width
@@ -94,6 +98,7 @@ class Aliens:
         self.aliens.empty()
         self.create_fleet()
         self.aliens_lasers.reset()
+       
 
     def create_alien(self, alien_number, row_number):
         type = row_number // 2
@@ -129,6 +134,8 @@ class Aliens:
     def check_fleet_empty(self):
         if len(self.aliens.sprites()) == 0:
             print('Aliens all gone!')
+            self.level += 1
+            self.sb.set_level(self.level)
             self.game.reset()
 
     def change_fleet_direction(self):
