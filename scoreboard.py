@@ -5,10 +5,14 @@ import os
 class Scoreboard:
     def __init__(self, game): 
         self.score = 0
-        self.level = 0
         self.game = game
-       # self.level = self.game.ship.ships_left
-        #game.ship.ships_left
+       
+        self.level = 0
+  
+       
+     
+        #self.level = self.game.ship.level
+        
 
         self.high_score = 0
         
@@ -34,6 +38,8 @@ class Scoreboard:
         self.score_image = None 
         self.score_rect = None
         self.prep_score()
+    def set_level(self, level):
+        self.level = level
     
     def update_high_score(self):
         with open('data.txt', 'r') as f:

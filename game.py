@@ -15,6 +15,8 @@ class Game:
         pg.init()
         self.settings = Settings()
 
+       
+
 
        
 
@@ -23,6 +25,8 @@ class Game:
     
         self.screen = pg.display.set_mode(size=size)
         pg.display.set_caption("Alien Invasion")
+        self.level = 3
+
 
         self.sound = Sound(bg_music="sounds/startrek.wav")
         self.scoreboard = Scoreboard(game=self)  
@@ -33,7 +37,13 @@ class Game:
         self.barriers = Barriers(game=self)
         self.ship = Ship(game=self)
         self.aliens = Aliens(game=self)
+        
+
+       
+
         self.settings.initialize_speed_settings()
+
+        
 
 
 
@@ -124,7 +134,7 @@ class Game:
 
 
 
-
+    
 
     def handle_events(self):
         keys_dir = {pg.K_w: Vector(0, -1), pg.K_UP: Vector(0, -1), 
@@ -158,11 +168,14 @@ class Game:
 
     def reset(self):
         print('Resetting game...')
+        
         # self.lasers.reset()    # handled by ship for ship_lasers and by aliens for alien_lasers
         self.barriers.reset()
         self.ship.reset()
         self.aliens.reset()
         self.scoreboard.reset()
+        
+        
 
     def game_over(self):
         print('All ships gone: game over!')
