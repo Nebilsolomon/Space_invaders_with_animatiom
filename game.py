@@ -46,33 +46,58 @@ class Game:
         self.state = "start"
 
         self.font_large = pg.font.Font(None, 60)
-        self.font_small = pg.font.Font(None, 30)
-        
-        self.image1 = pg.image.load("images/alien__00.png")
-        self.image1 = pg.transform.scale(self.image1, (100, 100))
         self.font = pg.font.Font(None, 36)
-        self.label = self.font.render("= 10", True, self.green)
+
+        
+        self.title_text = self.font_large.render("SPACE INVADERS", True, self.green)
+        
+        self.image1 = pg.image.load("images/alien_03-0.png")
+        self.image1 = pg.transform.scale(self.image1, (100, 100))
+        self.label = self.font.render("= 30", True, self.green)
+
+        self.image2 = pg.image.load("images/alien__10.png")
+        self.image2 = pg.transform.scale(self.image2, (100, 100))
+        self.label2 = self.font.render("= 20", True, self.green)
+
+        self.image3 = pg.image.load("images/alien__20.png")
+        self.image3 = pg.transform.scale(self.image3, (100, 100))
+        self.label3 = self.font.render("= 10", True, self.green)
+
+        self.image4 = pg.image.load("images/mystery.png")
+        self.image4 = pg.transform.scale(self.image4, (100, 100))
+        self.label4 = self.font.render("= 100", True, self.green)
 
 
         
 
 
 
-        self.title_text = self.font_large.render("SPACE INVADERS", True, self.green)
-        #self.start_text = self.font_small.render("Click PLAY to start", True, self.white)
+     
         self.button_width = 200
         self.button_height = 50
         self.button_x = self.settings.screen_width / 2 - self.button_width / 2
-        self.button_y = self.settings.screen_height / 2 - self.button_height / 2
-        self.button_text = self.font_small.render("PLAY", True, self.green)
+        self.button_y =(self.settings.screen_height - 50)  - self.button_height / 2
+        self.button_text = self.font_large.render("PLAY", True, self.green)
         self.button_text_x = self.button_x + self.button_width / 2 - self.button_text.get_width() / 2
-        self.button_text_y = self.button_y + self.button_height / 2 - self.button_text.get_height() / 2
+        self.button_text_y = self.button_y + self.button_height / 2  - self.button_text.get_height() / 2
     
     def draw(self):
         self.screen.fill(self.black)
 
         self.screen.blit(self.image1, (500, 150))
         self.screen.blit(self.label , (640, 180))
+         
+        self.screen.blit(self.image2, (500, 270))
+        self.screen.blit(self.label2 , (640, 310))
+        
+        self.screen.blit(self.image3, (500, 380))
+        self.screen.blit(self.label3 , (640, 420))
+
+        self.screen.blit(self.image4, (500, 490))
+        self.screen.blit(self.label4 , (640, 520))
+
+
+
         self.screen.blit(self.title_text,(400, 20) )
 
 
