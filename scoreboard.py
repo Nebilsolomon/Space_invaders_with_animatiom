@@ -10,6 +10,7 @@ class Scoreboard:
     def __init__(self, game): 
         self.score = 0
         self.game = game
+        self.ship_num = 0
        
         self.level = 0
         self.ships = Group()
@@ -72,8 +73,11 @@ class Scoreboard:
 
         self.prep_score()
     
-    def ships_num_ship_left(ship):
-        return ship
+    def ships_num_ship_left(self, ship_num):
+        self.ship_num = ship_num
+        
+       
+        
 
 
     
@@ -82,7 +86,7 @@ class Scoreboard:
 
     def prep_ships(self):
         #self.ships = Group()
-        for ship_number in range(3):
+        for ship_number in range(self.ship_num):
             ship = Ship(game= self.game) 
             ship.rect.x = 10 + ship_number * ship.rect.width 
             ship.rect.y = 10
