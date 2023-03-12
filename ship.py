@@ -14,6 +14,7 @@ class Ship(Sprite):  # TODO -- change to use YOUR OWN IMAGE for the ship AND its
 
     def __init__(self, game):
         super().__init__()
+        self.left_ship  = 3
         self.game = game
         self.scoreboard = game.scoreboard
         self.screen = game.screen
@@ -62,6 +63,20 @@ class Ship(Sprite):  # TODO -- change to use YOUR OWN IMAGE for the ship AND its
     def hit(self):
         if not self.dying:
             print('SHIP IS HIT !!!!!!!!!!!!!!!!!!!!!')
+
+            self.left_ship -= 1
+            self.scoreboard.ships.empty()
+            self.scoreboard.set_left_ship(self.left_ship)
+           # self.sb.left_ship = self.left_ship
+            self.scoreboard.prep_ships(self.left_ship)
+            self.scoreboard.ships.draw(self.screen)
+
+
+
+
+
+
+
             self.dying = True 
             self.timer = self.timer_explosion
 
@@ -70,6 +85,11 @@ class Ship(Sprite):  # TODO -- change to use YOUR OWN IMAGE for the ship AND its
         self.scoreboard.ships_num_ship_left(self.ships_left)
         print(f'Ship is dead! Only {self.ships_left} ships left')
         self.game.reset() if self.ships_left > 0 else self.game.game_over()
+
+
+
+
+
 
     def update(self):
         if self.timer == self.timer_explosion and self.timer.is_expired():

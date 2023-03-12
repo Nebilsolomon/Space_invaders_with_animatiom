@@ -178,10 +178,9 @@ class Aliens:
             self.left_ship -= 1
             self.sb.ships.empty()
             self.sb.set_left_ship(self.left_ship)
-           # self.sb.left_ship = self.left_ship
+            self.sb.left_ship = self.left_ship
             self.sb.prep_ships(self.left_ship)
             self.sb.ships.draw(self.screen)
-            self.sb.update()
             self.ship.hit()
 
         # aliens_lasers collide with barrier?
