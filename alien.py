@@ -63,6 +63,8 @@ class Alien(Sprite):
         self.screen.blit(image, rect)
 
 
+#================================================================
+
 class Aliens:
     def __init__(self, game): 
         self.model_alien = Alien(game=game, type=0, alien_number=0)
@@ -70,6 +72,8 @@ class Aliens:
         self.sb = game.scoreboard
         self.aliens = Group()
         self.level = 0
+        self.left_ship = 3
+        self.sb.prep_ships(3)
       
 
         self.ship_lasers = game.ship_lasers.lasers    # a laser Group
@@ -171,6 +175,13 @@ class Aliens:
         collisions = pg.sprite.spritecollide(self.ship, self.aliens_lasers.lasers, True)
         if collisions:
             print("collisions:   shipppp ") 
+            self.left_ship -= 1
+            self.sb.ships.empty()
+            self.sb.set_left_ship(self.left_ship)
+           # self.sb.left_ship = self.left_ship
+            self.sb.prep_ships(self.left_ship)
+            self.sb.ships.draw(self.screen)
+            self.sb.update()
             self.ship.hit()
 
         # aliens_lasers collide with barrier?
