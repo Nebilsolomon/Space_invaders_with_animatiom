@@ -7,6 +7,7 @@ from sound import Sound
 from scoreboard import Scoreboard
 from vector import Vector
 from barrier import Barriers
+from mystery import Mystery
 import sys 
 
 
@@ -37,7 +38,7 @@ class Game:
         self.barriers = Barriers(game=self)
         self.ship = Ship(game=self)
         self.aliens = Aliens(game=self)
-        
+        self.mystery = Mystery(game = self)
 
        
 
@@ -222,6 +223,7 @@ class Game:
                 self.barriers.update()
                 # self.lasers.update()    # handled by ship for ship_lasers and by alien for alien_lasers
                 self.scoreboard.update()
+                self.mystery.update()
                 pg.display.flip()
 
 
