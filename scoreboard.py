@@ -10,7 +10,7 @@ class Scoreboard:
     def __init__(self, game): 
         self.score = 0
         self.game = game
-        self.ship_num = 0
+        self.left_ship = 3
        
         self.level = 0
         self.ships = Group()
@@ -44,8 +44,14 @@ class Scoreboard:
         self.score_image = None 
         self.score_rect = None
         self.prep_score()
+    
+    
     def set_level(self, level):
         self.level = level
+    
+    def set_left_ship(self, left_ship):
+        self.left_ship = left_ship
+
     
     def update_high_score(self):
         with open('data.txt', 'r') as f:
@@ -84,9 +90,9 @@ class Scoreboard:
 
 # =================================================================
 
-    def prep_ships(self):
+    def prep_ships(self, num):
         #self.ships = Group()
-        for ship_number in range(self.ship_num):
+        for ship_number in range(num):
             ship = Ship(game= self.game) 
             ship.rect.x = 10 + ship_number * ship.rect.width 
             ship.rect.y = 10
@@ -145,5 +151,9 @@ class Scoreboard:
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.level_image, self.level_rect)
-        self.prep_ships()
+        
+        print("left_ship: " , self.left_ship)
+        self.prep_ships(self.left_ship)
         self.ships.draw(self.screen)
+
+       
