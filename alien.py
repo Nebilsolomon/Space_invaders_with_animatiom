@@ -5,6 +5,7 @@ import pygame as pg
 from pygame.sprite import Sprite, Group
 from laser import Lasers
 from timer import Timer
+from vector import Vector
 
 
 class Alien(Sprite): 
@@ -23,12 +24,14 @@ class Alien(Sprite):
     def __init__(self, game, type, alien_number):
         super().__init__()
         self.level = 0 
+        self.v =  Vector(1,0)
         self.screen = game.screen
         self.settings = game.settings
         self.image = pg.image.load('images/alien0.bmp')
         self.rect = self.image.get_rect()
         self.rect.y = self.rect.height
         self.x = float(self.rect.x)
+       
         self.type = type
         self.sb = game.scoreboard
         self.dying = self.dead = False
@@ -55,6 +58,17 @@ class Alien(Sprite):
         settings = self.settings
         self.x += (settings.alien_speed * settings.fleet_direction)
         self.rect.x = self.x
+
+   
+
+
+         
+
+        
+
+
+
+
         self.draw()
     def draw(self): 
         image = self.timer.image()
@@ -70,6 +84,7 @@ class Aliens:
         self.model_alien = Alien(game=game, type=0, alien_number=0)
         self.game = game
         self.sb = game.scoreboard
+        self.v =  Vector(1,0)
         self.aliens = Group()
         self.level = 0
         self.left_ship = 3
@@ -127,6 +142,13 @@ class Aliens:
         for alien in self.aliens.sprites(): 
             if alien.check_edges():
                 self.change_fleet_direction()
+                    
+
+                self.v.x *= -1
+                for alien in self.aliens:
+                    alien.v.x *= -1
+                    alien.rect.y += (self.settings.fleet_drop_speed) * 10
+                
                 break
 
     def check_fleet_bottom(self):
@@ -141,6 +163,7 @@ class Aliens:
             self.level += 1
             self.sb.set_level(self.level)
             self.game.reset()
+            self.settings.fleet_drop_speed += 2
 
     def change_fleet_direction(self):
         for alien in self.aliens.sprites():
