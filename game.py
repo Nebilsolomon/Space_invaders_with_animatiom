@@ -15,6 +15,7 @@ class Game:
     def __init__(self):
         pg.init()
         self.settings = Settings()
+        self.play_num = 2
 
        
 
@@ -78,20 +79,32 @@ class Game:
         self.image4 = pg.transform.scale(self.image4, (100, 100))
         self.label4 = self.font.render("= 100", True, self.green)
 
+        self.button_width = 200
+        self.button_height = 50
 
-        
 
+#===========  NEw Code for Button =================================================================
+
+        self.button_color = pg.Color("blue")
+        self.button_hover_color = pg.Color("red")
+        self.button_rect = pg.Rect(500, 650, 150,  100)
+        self.button_text = pg.font.SysFont(None, 30).render(" PLAY ", True, self.green)
+        self.button_text_rect = self.button_text.get_rect(center=self.button_rect.center)
 
 
      
-        self.button_width = 200
-        self.button_height = 50
-        self.button_x = self.settings.screen_width / 2 - self.button_width / 2
-        self.button_y =(self.settings.screen_height - 50)  - self.button_height / 2
-        self.button_text = self.font_large.render("PLAY", True, self.green)
-        self.button_text_x = self.button_x + self.button_width / 2 - self.button_text.get_width() / 2
-        self.button_text_y = self.button_y + self.button_height / 2  - self.button_text.get_height() / 2
+        
+    #================================================================++++++++
+        #self.button_x = self.settings.screen_width / 2 - self.button_width / 2
+        #self.button_y =(self.settings.screen_height - 50)  - self.button_height / 2
+        #self.button_text = self.font_large.render("PLAY", True, self.green)
+        #self.button_text_x = self.button_x + self.button_width / 2 - self.button_text.get_width() / 2
+        #self.button_text_y = self.button_y + self.button_height / 2  - self.button_text.get_height() / 2
     
+#================================================================++++++++
+
+
+
     def draw(self):
         self.screen.fill(self.black)
 
@@ -111,12 +124,15 @@ class Game:
 
         self.screen.blit(self.title_text,(400, 20) )
 
+        pg.draw.rect(self.screen, self.button_color, self.button_rect)
+        self.screen.blit(self.button_text, self.button_text_rect)
+
 
 
 
 
        # pg.draw.rect(self.screen, self.black, (self.button_x, self.button_y, self.button_width, self.button_height))
-        self.screen.blit(self.button_text, (self.button_text_x, self.button_text_y))
+        #self.screen.blit(self.button_text, (self.button_text_x, self.button_text_y))
 
 
 
@@ -148,7 +164,7 @@ class Game:
 
             elif event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
                 # Check if user clicked on PLAY button
-                if self.button_x < event.pos[0] < self.button_x + self.button_width and self.button_y < event.pos[1] < self.button_y + self.button_height:
+                if self.button_rect.x < event.pos[0] <self.button_rect.x + self.button_rect.width and self.button_rect.y < event.pos[1] < self.button_rect.y + self.button_rect.height:
                     self.state = "play"
                   #  self.game.sound.play_bg()
         
@@ -167,6 +183,17 @@ class Game:
                 elif key == pg.K_SPACE:
                     self.ship.cease_fire()
 
+
+
+
+        if self.button_rect.collidepoint(pg.mouse.get_pos()):
+            self.button_color = self.button_hover_color
+        else:
+            self.button_color = pg.Color("blue")
+
+
+
+
     def reset(self):
         print('Resetting game...')
         
@@ -175,14 +202,54 @@ class Game:
         self.ship.reset()
         self.aliens.reset()
         self.scoreboard.reset()
+    
+    def restart(self):
+          
+        pg.init()
+        size = self.settings.screen_width, self.settings.screen_height   # tuple
+        self.screen = pg.display.set_mode(size=size)
+        pg.display.set_caption("Alien Invasion")
+
+        self.button_color = pg.Color("blue")
+        self.button_hover_color = pg.Color("red")
+        self.button_rect = pg.Rect(500, 650, 150,  100)
+        self.button_text = pg.font.SysFont(None, 30).render(" PLAY AGAIN ", True, self.green)
+        self.button_text_rect = self.button_text.get_rect(center=self.button_rect.center)
+        
+        pg.draw.rect(self.screen, self.button_color, self.button_rect)
+        self.screen.blit(self.button_text, self.button_text_rect)
+
+        pg.display.update()
+        self.screen.fill(self.settings.bg_color)
+        for event in pg.event.get():
+
+            if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+                # Check if user clicked on PLAY button
+                if self.button_rect.x < event.pos[0] <self.button_rect.x + self.button_rect.width and self.button_rect.y < event.pos[1] < self.button_rect.y + self.button_rect.height:
+                    self.play_num = 1
+                else:
+                    self.play_num = 2
+
+
+                
+
+
+
+
+     
+        
+
         
         
 
     def game_over(self):
         print('All ships gone: game over!')
         self.sound.gameover()
+        #self.restart()
+       
         pg.quit()
         sys.exit()
+       
 
     def play(self):
         #self.sound.play_bg()
