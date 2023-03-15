@@ -205,30 +205,7 @@ class Game:
     
     def restart(self):
           
-        pg.init()
-        size = self.settings.screen_width, self.settings.screen_height   # tuple
-        self.screen = pg.display.set_mode(size=size)
-        pg.display.set_caption("Alien Invasion")
-
-        self.button_color = pg.Color("blue")
-        self.button_hover_color = pg.Color("red")
-        self.button_rect = pg.Rect(500, 650, 150,  100)
-        self.button_text = pg.font.SysFont(None, 30).render(" PLAY AGAIN ", True, self.green)
-        self.button_text_rect = self.button_text.get_rect(center=self.button_rect.center)
-        
-        pg.draw.rect(self.screen, self.button_color, self.button_rect)
-        self.screen.blit(self.button_text, self.button_text_rect)
-
-        pg.display.update()
-        self.screen.fill(self.settings.bg_color)
-        for event in pg.event.get():
-
-            if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
-                # Check if user clicked on PLAY button
-                if self.button_rect.x < event.pos[0] <self.button_rect.x + self.button_rect.width and self.button_rect.y < event.pos[1] < self.button_rect.y + self.button_rect.height:
-                    self.play_num = 1
-                else:
-                    self.play_num = 2
+      print('Restarting game...')
 
 
                 
@@ -249,6 +226,8 @@ class Game:
        
         pg.quit()
         sys.exit()
+        
+        
        
 
     def play(self):
@@ -272,15 +251,7 @@ class Game:
             # Add your game code here
                 
 
-                pg.display.update()
-
-
-
-
-
-
-
-
+               # pg.display.update()
 
                 
                 self.screen.fill(self.settings.bg_color)
